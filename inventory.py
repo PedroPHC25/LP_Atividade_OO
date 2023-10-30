@@ -51,9 +51,9 @@ class Inventory:
         
         # Por padrão, o método retorna todo o estoque
         if category == "all":
-            return {"Hygiene": self.hygiene,
-                    "Electronic": self.electronic,
-                    "Food": self.food}
+            return {"Higiene": self.hygiene,
+                    "Eletrônicos": self.electronic,
+                    "Alimentos": self.food}
         
         # Pode retornar apenas uma categoria
         if category == "hygiene":
