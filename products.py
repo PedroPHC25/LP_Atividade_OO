@@ -58,6 +58,13 @@ class ProductFood(Product):
     def get_product_info(self):
         return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}, Validity:{self.validity}, type:{self.type}."
     
+    # Cria método que retorna se o produto está dentro da validade.
+    #OBS: ano_mes_atual deve estar no formato YYYYMM, assim como validity também.
+    def check_validity(self, ano_mes_atual, validity):
+        if ano_mes_atual > validity :
+            return "Produto vencido."
+        else:
+            return "Produto dentro da validade."
 
 # Cria a subclasse ProductEletronic, filha da classe Product 
 class ProductElectronic(Product):
