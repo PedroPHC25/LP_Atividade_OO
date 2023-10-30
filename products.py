@@ -2,7 +2,7 @@
 
 from enum import Enum
 
-
+#Enumerando as marcas dos produtos
 class HygieneBrands(Enum):
     Nivea = 1
     Colgate = 2
@@ -19,8 +19,7 @@ class ElectronicBrands(Enum):
     LG = 2
     Apple = 3
 
-
-
+# Cria a classe pai, Product
 class Product:
     def __init__(self, name, bar_code, price, brand):
         self.name = name
@@ -28,16 +27,26 @@ class Product:
         self.price = price
         self.brand = brand
 
+    # Método que retorna as informação do produto
     def get_product_info(self):
         return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}."
     
+    # Sobreescreve o comportamento do método print para 
+    # a classe Product e suas classes filhas.
     def __str__(self):
         return self.name
+    
+    # Método que atualiza o preço antingo por um novo preço
+    def set_price(self, new_price):
+        self.price = new_price
 
-class PrdoductHygieni(Product):  
+# Cria a subclasse ProductHygiene, filha da classe Product 
+class ProductHygieni(Product):  
     def __init__(self, name, bar_code, price, brand):
         super().__init__(name, bar_code, price, brand)
 
+
+# Cria a subclasse ProductFood, filha da classe Product 
 class ProductFood(Product):
     def __init__(self, name, bar_code, brand, price, validity, type):
         super().__init__(name, bar_code, price, brand)
@@ -45,12 +54,12 @@ class ProductFood(Product):
         self.type = type
     
     # Redefine o método get_product_info, adicionando as novas 
-    # característica que não pertenciam ao pai. 
-
+    # característica que não pertenciam à pai. 
     def get_product_info(self):
         return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}, Validity:{self.validity}, type:{self.type}."
     
 
+# Cria a subclasse ProductEletronic, filha da classe Product 
 class ProductElectronic(Product):
     def __init__(self, name, bar_code, price, type, brand, ram):
         super().__init__(name, bar_code, brand, price)
@@ -59,14 +68,15 @@ class ProductElectronic(Product):
 
     # Redefine o método get_product_info, adicionando as novas 
     # característica que não pertenciam ao pai. 
-
     def get_product_info(self):
         return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}, Type:{self.type}, RAM:{self.ram}."
     
+    # Adiciona um novo método upadate que atualiza o produto eletrônico,
+    # método esse que não pertenciam à classe pai.
+
     def update(self):
         return "{self.name} atualizado."
 
-#TODO set price
 
 
 
