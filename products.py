@@ -41,7 +41,7 @@ class Product:
         self.price = new_price
 
 # Cria a subclasse ProductHygiene, filha da classe Product 
-class ProductHygieni(Product):  
+class ProductHygiene(Product):  
     def __init__(self, name, bar_code, price, brand):
         super().__init__(name, bar_code, price, brand)
 
@@ -68,15 +68,14 @@ class ProductFood(Product):
 
 # Cria a subclasse ProductEletronic, filha da classe Product 
 class ProductElectronic(Product):
-    def __init__(self, name, bar_code, price, type, brand, ram):
+    def __init__(self, name, bar_code, price, brand, ram):
         super().__init__(name, bar_code, brand, price)
-        self.type = type
         self.ram = ram
 
     # Redefine o método get_product_info, adicionando as novas 
     # característica que não pertenciam ao pai. 
     def get_product_info(self):
-        return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}, Type:{self.type}, RAM:{self.ram}."
+        return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}, RAM:{self.ram}."
     
     # Adiciona um novo método upadate que atualiza o produto eletrônico,
     # método esse que não pertenciam à classe pai.
