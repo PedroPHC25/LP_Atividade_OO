@@ -5,6 +5,13 @@ class CategoryInexistent(NameError):
         super().__init__(self.message)
 
 
+class ProductNotFound(ValueError):
+    
+    def __init__(self, message = "Produto não encontrado na categoria informada."):
+        self.message = message
+        super().__init__(self.message)
+
+
 class Inventory:
 
     total_products = 0
@@ -20,27 +27,65 @@ class Inventory:
     
     def add_product(self, product, category):
         if category == "hygiene":
-            Inventory.hygiene.append(product)
-            total_products += 1
+            self.hygiene.append(product)
+            Inventory.total_products += 1
         elif category == "electronic":
-            Inventory.electronic.append(product)
-            total_products += 1
+            self.electronic.append(product)
+            Inventory.total_products += 1
         elif category == "food":
-            Inventory.food.append(product)
-            total_products += 1
+            self.food.append(product)
+            Inventory.total_products += 1
         else:
             raise CategoryInexistent()
             
     def get_products(self, category = "all"):
         if category == "all":
-            return {"Hygiene: ": Inventory.hygiene,
-                    "Electronic: ": Inventory.electronic,
-                    "Food: ": Inventory.food}
+            return {"Hygiene": self.hygiene,
+                    "Electronic": self.electronic,
+                    "Food": self.food}
         if category == "hygiene":
-            return Inventory.hygiene
+            return self.hygiene
         elif category == "electronic":
-            return Inventory.electronic
+            return self.electronic
         elif category == "food":
-            return Inventory.food
+            return self.food
         else:
             raise CategoryInexistent
+            
+    def sell_product(self, hygiene = [], electronic = [], food = []):
+        for product in hygiene:
+            if product in self.hygiene:
+                self.hygiene.remove(product)
+            else:
+                raise ProductNotFound()
+        for product in electronic:
+            if product in self.electronic:
+                self.electronic.remove(product)
+            else:
+                raise ProductNotFound()
+        for product in food:
+            if product in self.food:
+                self.food.remove(product)
+            else:
+                raise ProductNotFound()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
