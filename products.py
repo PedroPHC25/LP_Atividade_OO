@@ -1,8 +1,7 @@
 #higiene, alimento e eletrônico
 
-#TODO con figurar p print (__str__) 
-
 from enum import Enum
+
 
 class HygieneBrands(Enum):
     Nivea = 1
@@ -40,10 +39,17 @@ class PrdoductHygieni(Product):
         super().__init__(name, bar_code, price, brand)
 
 class ProductFood(Product):
-    def __init__(self, name, bar_code, brand, price, weight, type):
+    def __init__(self, name, bar_code, brand, price, validity, type):
         super().__init__(name, bar_code, price, brand)
-        self.weight = weight
+        self.validity = validity
         self.type = type
+    
+    # Redefine o método get_product_info, adicionando as novas 
+    # característica que não pertenciam ao pai. 
+
+    def get_product_info(self):
+        return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}, Validity:{self.validity}, type:{self.type}."
+    
 
 class ProductElectronic(Product):
     def __init__(self, name, bar_code, price, type, brand, ram):
@@ -51,6 +57,16 @@ class ProductElectronic(Product):
         self.type = type
         self.ram = ram
 
+    # Redefine o método get_product_info, adicionando as novas 
+    # característica que não pertenciam ao pai. 
+
+    def get_product_info(self):
+        return f"{self.name}, Bar Code:{self.bar_code}, Price:{self.price}, Brand:{self.brand}, Type:{self.type}, RAM:{self.ram}."
+    
+    def update(self):
+        return "{self.name} atualizado."
+
+#TODO set price
 
 
 
