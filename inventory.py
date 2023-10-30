@@ -93,21 +93,3 @@ class Inventory:
                 Inventory.total_products -= 1
             else:
                 raise ProductNotFound()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
