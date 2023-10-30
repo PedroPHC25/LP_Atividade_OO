@@ -81,7 +81,7 @@ class ProductElectronic(Product):
     # método esse que não pertenciam à classe pai.
 
     def update(self):
-        return "{self.name} atualizado."
+        return f"{self.name} atualizado."
 
 
 
