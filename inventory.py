@@ -1,5 +1,5 @@
 # Exceção de categoria inexistente
-class CategoryInexistent(NameError):
+class CategoryInexistentError(NameError):
     
     def __init__(self, message = "Categoria não encontrada."):
         self.message = message
@@ -7,7 +7,7 @@ class CategoryInexistent(NameError):
 
 
 # Exceção de produto não encontrado
-class ProductNotFound(ValueError):
+class ProductNotFoundError(ValueError):
     
     def __init__(self, message = "Produto não encontrado na categoria informada."):
         self.message = message
@@ -49,23 +49,31 @@ class Inventory:
     # Método para retornar os itens em estoque. Pode receber como argumento a categoria desejada
     def get_products(self, category = "all"):
         
+        # Criando um dicionário com os nomes de todos os produtos
+        product_names = {"Higiene": [], "Eletrônicos": [], "Alimentos": []}
+
+        for product in self.hygiene:
+            product_names["Higiene"].append(product.name)
+        for product in self.electronic:
+            product_names["Eletrônicos"].append(product.name)
+        for product in self.food:
+            product_names["Alimentos"].append(product.name)
+
         # Por padrão, o método retorna todo o estoque
         if category == "all":
-            return {"Higiene": self.hygiene,
-                    "Eletrônicos": self.electronic,
-                    "Alimentos": self.food}
+            return product_names
         
         # Pode retornar apenas uma categoria
         if category == "hygiene":
-            return self.hygiene
+            return product_names["Higiene"]
         elif category == "electronic":
-            return self.electronic
+            return product_names["Eletrônicos"]
         elif category == "food":
-            return self.food
+            return product_names["Alimentos"]
         
         # Levanta uma exceção se a categoria não existir no inventário
         else:
-            raise CategoryInexistent()
+            raise CategoryInexistentError()
             
     # Método para vender produtos. Assim como o método add_product, recebe como
     # argumentos listas contendo os produtos de cada categoria a serem vendidos
@@ -78,18 +86,18 @@ class Inventory:
                 self.hygiene.remove(product)
                 Inventory.total_products -= 1
             else:
-                raise ProductNotFound()
+                raise ProductNotFoundError()
                 
         for product in electronic:
             if product in self.electronic:
                 self.electronic.remove(product)
                 Inventory.total_products -= 1
             else:
-                raise ProductNotFound()
+                raise ProductNotFoundError()
                 
         for product in food:
             if product in self.food:
                 self.food.remove(product)
                 Inventory.total_products -= 1
             else:
-                raise ProductNotFound()
+                raise ProductNotFoundError()
